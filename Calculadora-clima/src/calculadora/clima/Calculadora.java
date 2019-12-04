@@ -29,7 +29,26 @@ public class Calculadora {
         option = read.nextInt();
         
         if(option != 7 & option < 7 & option > 0){
-            System.out.println("Ingresa los grados");
+            switch(option){
+                case 1:
+                    System.out.println("Ingresa los grados Celcius");
+                    break;
+                case 2:
+                    System.out.println("Ingresa los grados Fahrenheit");
+                    break;
+                case 3:
+                    System.out.println("Ingresa los grados Celcius");
+                    break;
+                case 4:
+                    System.out.println("Ingresa los grados Kelvin");
+                    break;
+                case 5:
+                    System.out.println("Ingresa los grados Fahrenheit");
+                    break;
+                case 6:
+                    System.out.println("Ingresa los grados Kelvin");
+                    break;
+            }
             grades = read.nextFloat();
         }
         
