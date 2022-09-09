@@ -1,0 +1,13 @@
+.flex {
+  display: flex;
+  background-color: yellow;
+  height: 300px;
+  justify-content: baseline;
+}
+
+.contenido-1, .contenido-2, .contenido-3 {
+  background-color: white;
+  height: 200px;
+  width: 100px;
+  border: 1px solid black;
+}
