@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+button::before {
+  content: 'Pasa por encima';
+}
+
+button {
+  width: 10rem;
+  height: 5rem;
+  margin: 50vh 50vw;
+  transform: translate(-50%);
+}
+
+
+button:hover::before {
+  display: none;
+}
+
+button:hover {
+  background-color: green;
+  color: white;
+}
+
+button:hover::after {
+  content: 'Hecho';
+}
