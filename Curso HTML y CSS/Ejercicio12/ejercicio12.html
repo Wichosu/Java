@@ -29,11 +29,65 @@
           previous versions of Bootstrap. Check out the examples below for how you can remix
           and restyle it to your liking.
         </p>
-        <button class="btn btn-primary fs-5 py-2 px-3 mb-5 rounded-3">
+        <button 
+          type="button" 
+          data-bs-toggle="modal" 
+          data-bs-target="#Modal"
+          class="btn btn-primary fs-5 py-2 px-3 mb-5 rounded-3">
           Example button
         </button>
+
+        <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Ejemplo de Modal
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <hr>
+
+    <form class="row">
+      <div class="mb-3 col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" aria-describedby="nombre" placeholder="Wicho" required>
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="telefono" class="form-label">teléfono</label>
+        <input type="number" class="form-control" id="telefono" aria-describedby="telefono" placeholder="2288185925" required>
+      </div>
+      <div class="mb-4">
+        <label for="mensaje" class="form-label">Mensaje</label>
+        <textarea  class="form-control" id="mensaje" rows="3" placeholder="Mi pc murio :(" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary col-md-1 mx-3">Enviar</button>
+
+    </form>
+
+    <hr>
+
+    <div class="card my-4" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Luis Eduardo Calderón Miranda</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Desarrollador Frontend</h6>
+        <p class="card-text">Estudiante. Buscando empleo como desarrollador frontend remoto</p>
+        <a href="mailto:luiscalderonmiranda@gmail.com" class="card-link">luiscalderonmiranda@gmail.com</a>
+      </div>
+    </div>
+
   </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
