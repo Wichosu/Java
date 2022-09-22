@@ -29,10 +29,22 @@
   padding: 0.1rem 1rem;
 }
 
+.main-menu {
+  margin: 0;
+}
 .main-menu li {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  padding: 0 1rem;
+  font-weight: 400;
   list-style: none;
   display: inline;
+}
+.main-menu li a {
+  color: #000;
+  text-decoration: none;
+}
+.main-menu li a:hover {
+  text-decoration: underline;
 }
 
 .icon-sm i {
@@ -80,6 +92,43 @@
   margin-top: -2rem;
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 4rem;
+  border-bottom: solid 1px #ddd;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 7rem;
+}
+
+.sec-home {
+  display: flex;
+  width: 100%;
+  max-width: 768px;
+  padding: 5rem;
+  align-items: center;
+  margin: auto;
+}
+.sec-home .home-cta {
+  flex: 1;
+}
+.sec-home .home-cta .cta-text {
+  color: #0075FF;
+}
+.sec-home .home-cta .home-title {
+  width: 20rem;
+  font-size: 3rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

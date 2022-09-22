@@ -45,10 +45,22 @@ $color-main: #0075FF;
 }
 
 .main-menu {
+  margin: 0;
   li {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    font-weight: 400;
     list-style: none;
     display: inline;
+
+    a {
+      color: #000;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
