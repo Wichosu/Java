@@ -9,6 +9,7 @@
 }
 
 $color-main: #0075FF;
+$color-footer: #F4F8FE;
 
 .btn-main {
   @include btn-base();
@@ -67,22 +68,22 @@ $color-main: #0075FF;
 .icon-sm {
   
   i {
-    font-size: 0.75rem;
-    padding: 0.1rem 0.25rem;
+    font-size: 1.25rem;
+    padding: 0.4rem 0.65rem;
     color: $color-main;
     border-radius: 50%;
     box-shadow: 0 0 10px #00000055;
   }
 }
 
-.feature {
+.benefit {
   display: flex;
   flex-direction: column;
   text-align: center;
 
-  .icon {
+  i {
     color: $color-main;
-    font-size: 15rem;
+    font-size: 7.5rem;
   }
 
   .description {
@@ -109,14 +110,14 @@ $color-main: #0075FF;
   align-items: center;
   justify-content: center;
 
-  .icon {
+  i {
     color: $color-main;
     font-size: 10rem;
     padding: 0;
   }
 
   .title {
-    margin-top: -2rem;
+    margin-top: -1rem;
     font-size: 1.5rem;
     font-weight: 600;
   }
