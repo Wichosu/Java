@@ -2,3 +2,5 @@ investigar y practicar:
 
 cherry pick
 git hooks
+git revert
+git reset
