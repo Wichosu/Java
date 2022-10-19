@@ -3,6 +3,10 @@ import './App.css';
 import Greeting from './components/pure/greeting.jsx';
 import GreetingF from './components/pure/greetingF.jsx';
 import TaskListComponent from './components/containers/task_list.jsx';
+import Ejemplo from './hooks/Ejemplo1.jsx';
+import Ejemplo2 from './hooks/Ejemplo2.jsx';
+import MiComponenteConContexto from './hooks/Ejemplo3';
+import Ejemplo4 from './hooks/Ejemplo4';
 
 function App() {
   return (
@@ -13,7 +17,16 @@ function App() {
         {/* <Greeting name="Luis" /> */}
         {/* Componente funcional */}
         {/* <GreetingF name="Luis"/> */}
-        <TaskListComponent />
+        {/* <TaskListComponent /> */}
+        {/* <Ejemplo /> */}
+        {/* <Ejemplo2 /> */}
+        {/* <MiComponenteConContexto /> */}
+        <Ejemplo4 nombre="Luis">
+        {/* Todo lo que hay aqui, es tratado como props.children */}
+          <h3>
+            Contenido del props.children
+          </h3>
+        </Ejemplo4>
       </header>
     </div>
   );
