@@ -1,11 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Contact } from '../models/contact.class.js';
 
-const Contact = () => {
+const ContactComponent = ({ contact }) => {
   return (
-    <div>
-      
-    </div>
+    <tr>
+      <th>
+        <span>{ contact.name }</span>
+      </th>
+      <td>
+        <span>{ contact.surname }</span>
+      </td>
+      <td>
+        { contact.number }
+      </td>
+      <td>
+        { contact.email }
+      </td>
+    </tr>
   );
 }
 
-export default Contact;
+ContactComponent.propTypes = {
+  contact: PropTypes.instanceOf(Contact).isRequired,
+}
+
+export default ContactComponent;
