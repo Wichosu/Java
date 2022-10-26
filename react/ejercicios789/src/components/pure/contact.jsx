@@ -17,6 +17,9 @@ const ContactComponent = ({ contact }) => {
       <td>
         { contact.email }
       </td>
+      <td>
+        { contact.connected? 'Online' : 'Offline'}
+      </td>
     </tr>
   );
 }
