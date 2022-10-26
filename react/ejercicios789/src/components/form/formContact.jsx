@@ -23,7 +23,6 @@ const FormContact = ({ append }) => {
     surnameRef.current.value = '';
     numberRef.current.value = '';
     emailRef.current.value = '';
-    statusRef.current.value = '';
     append(newContact);
   }
 
@@ -32,23 +31,23 @@ const FormContact = ({ append }) => {
       <span className='display-5'>Create new contacts</span>
       <div className='mb-3'>
         <label className='form-label' htmlFor='name'>Name</label>
-        <input className='form-control' id='name' type='text' placeholder='Luis' ref={nameRef} />
+        <input className='form-control' id='name' type='text' placeholder='Luis' ref={nameRef} required />
       </div>
       <div className='mb-3'>
         <label className='form-label' htmlFor='surname'>Surname</label>
-        <input className='form-control' id='surname' type='text' placeholder='Miranda' ref={surnameRef} />
+        <input className='form-control' id='surname' type='text' placeholder='Miranda' ref={surnameRef} required />
       </div>
       <div className='mb-3'>
         <label className='form-label' htmlFor='number'>Number</label>
-        <input className='form-control' id='number' type='text' placeholder='2288182100' ref={numberRef}/>
+        <input className='form-control' id='number' type='text' placeholder='2288182100' ref={numberRef} required />
       </div>
       <div className='mb-3'>
         <label className='form-label' htmlFor='email'>Email</label>
-        <input className='form-control' id='email' type='email' placeholder='wicho@dev.com' ref={emailRef}/>
+        <input className='form-control' id='email' type='email' placeholder='wicho@dev.com' ref={emailRef} required />
       </div>
       <div className='mb-3'>
         <label className='form-label' htmlFor='status'>Status</label>
-        <select className='form-select' ref={statusRef}>
+        <select className='form-select' defaultValue={true}>
           <option value={true}>
             Online
           </option>

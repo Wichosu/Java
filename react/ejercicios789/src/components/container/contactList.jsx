@@ -15,9 +15,23 @@ const ContactList = () => {
     setContacts(tempContacts);
   }
 
+  function changeStatus(contact) {
+    const index = contacts.indexOf(contact);
+    const tempContacts = [...contacts];
+    tempContacts[index].connected = !tempContacts[index].connected;
+    setContacts(tempContacts);
+  }
+
+  function removeContact(contact) {
+    const index = contacts.indexOf(contact);
+    const tempContacts = [...contacts];
+    tempContacts.splice(index, 1);
+    setContacts(tempContacts);
+  }
+
   return (
     <div>
-      <table className='table'>
+      <table className='table align-middle table-striped'>
         <thead>
           <tr>
             <th scope='col'>Name</th>
@@ -25,6 +39,7 @@ const ContactList = () => {
             <th scope='col'>Number</th>
             <th scope='col'>Email</th>
             <th scope='col'>Status</th>
+            <th scope='col'>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +48,8 @@ const ContactList = () => {
               <ContactComponent 
                 key={index}
                 contact={contact}
+                change={ changeStatus }
+                remove={ removeContact }
               />
             )
           })}
