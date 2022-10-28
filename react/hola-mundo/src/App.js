@@ -9,6 +9,7 @@ import MiComponenteConContexto from './hooks/Ejemplo3';
 import Ejemplo4 from './hooks/Ejemplo4';
 import GreetingStyled from './components/pure/greetingStyled.jsx';
 import Father from './components/containers/father.jsx';
+import OptionalRender from './components/pure/optionalRender';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         </Ejemplo4> */}
         {/* <GreetingStyled name='Luis'/> */}
         {/* <Father /> */}
+        {/* Ejemplos de renderizado condicional */}
+        {/* <OptionalRender /> */}
       </header>
     </div>
   );
