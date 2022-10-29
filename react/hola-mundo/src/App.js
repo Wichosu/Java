@@ -10,6 +10,8 @@ import Ejemplo4 from './hooks/Ejemplo4';
 import GreetingStyled from './components/pure/greetingStyled.jsx';
 import Father from './components/containers/father.jsx';
 import OptionalRender from './components/pure/optionalRender';
+import LoginFormik from './components/pure/forms/loginFormik';
+import RegisterFormik from './components/pure/forms/registerFormik';
 
 function App() {
   return (
@@ -19,7 +21,6 @@ function App() {
         {/* <Greeting name="Luis" /> */}
         {/* Componente funcional */}
         {/* <GreetingF name="Luis"/> */}
-        <TaskListComponent />
         {/* <Ejemplo /> */}
         {/* <Ejemplo2 /> */}
         {/* <MiComponenteConContexto /> */}
@@ -33,6 +34,11 @@ function App() {
         {/* <Father /> */}
         {/* Ejemplos de renderizado condicional */}
         {/* <OptionalRender /> */}
+        {/* Ejemplo de Formik y Yup */}
+        {/* <LoginFormik /> */}
+        <RegisterFormik />
+        {/* PROYECTO FINAL: */}
+        {/* <TaskListComponent /> */}
       </header>
     </div>
   );
