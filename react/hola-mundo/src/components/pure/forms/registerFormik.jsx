@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 //Models
 import { User } from '../../../models/user.class';
 import { ROLES } from '../../../models/roles.enum';
-import { NULL } from 'node-sass';
 
 const RegisterFormik = () => {
 
