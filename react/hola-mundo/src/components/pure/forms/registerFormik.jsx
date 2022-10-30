@@ -69,7 +69,7 @@ const RegisterFormik = () => {
               handleChange,
               handleBlur }) => (
                 <Form>
-                  <label htmlFor='username'>Email</label>
+                  <label htmlFor='username'>Username</label>
                   <Field id='username' type='text' name='username' placeholder='Your username' />
 
                   {/* Username Errors */}
@@ -80,7 +80,7 @@ const RegisterFormik = () => {
                     )
                   }
 
-                  <label htmlFor='email'></label>
+                  <label htmlFor='email'>Email</label>
                   <Field id='email' type='email' name='email' placeholder='example@email.com' />
 
                   {/* Email Errors */}
