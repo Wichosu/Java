@@ -32,7 +32,7 @@ const TaskFormik = ({ add, length }) => {
   return (
     <div>
       <h4>Generate a Task</h4>
-      <Formik
+      <Formik 
         initialValues={initialValues}
         validationSchema={taskSchema}
         onSubmit={async (values) => {
@@ -45,7 +45,7 @@ const TaskFormik = ({ add, length }) => {
         {({ values, touched, errors, isSubmitting, handleChange, handleBlur }) => (
               <Form>
                 <label htmlFor='name'>Task Name</label>
-                <Field id='name' type='text' name='name' placeholder='Ex: Clean the house' />
+                <Field className='form-control' id='name' type='text' name='name' placeholder='Ex: Clean the house' />
 
                 {/* Error message task name */}
                 {
@@ -56,7 +56,7 @@ const TaskFormik = ({ add, length }) => {
                 }
 
                 <label htmlFor='description'>Task Description</label>
-                <Field id='description' type='text' name='description' placeholder='Ex: Mop the floor, clean the windows, etc...' />
+                <Field className='form-control' id='description' type='text' name='description' placeholder='Ex: Mop the floor, clean the windows, etc...' />
 
                 {/* Error message for task description */}
                 {
@@ -68,10 +68,11 @@ const TaskFormik = ({ add, length }) => {
 
                 <label htmlFor='level'>Task Level</label>
                 <Field
+                  className='form-select'
                   component='select'
                   id='level'
-                  name='location'
-                  multiple={true}
+                  name='level'
+                  multiple={false}
                 >
                   <option value={LEVELS.NORMAL}>NORMAL</option>
                   <option value={LEVELS.URGENTE}>URGENTE</option>
@@ -85,7 +86,7 @@ const TaskFormik = ({ add, length }) => {
                     <ErrorMessage name='level' component='div'></ErrorMessage>
                   )
                 }
-                <button type='submit'>{length < 0 ? 'Add first task' : 'Add new task'}</button>
+                <button className='mt-3 btn btn-success' type='submit'>{length < 0 ? 'Add first task' : 'Add new task'}</button>
                 { isSubmitting ? (<p>Adding task...</p>) : null}
               </Form>
           )
