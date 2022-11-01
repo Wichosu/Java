@@ -16,7 +16,7 @@ const ProfilePage = ({user}) => {
   return (
     <div>
       <h1>Your Profile</h1>
-      <button onClick={() => navigateTo('/tasks')}>Tasks</button>
+      <button onClick={() => navigateTo('/profile/tasks')}>Tasks</button>
       <button onClick={ goBack }>Go Back</button>
     </div>
   );

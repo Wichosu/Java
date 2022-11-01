@@ -11,9 +11,14 @@ const DashBoardPage = () => {
     history.push('/login');
   }
 
+  const goToProfile = () => {
+    history.push('/profile')
+  }
+
   return (
     <div>
       <Button variant='contained' onClick={logout}>Logout</Button>
+      <Button variant='contained' onClick={goToProfile}>Profile</Button>
       <Copyright></Copyright>
     </div>
   );

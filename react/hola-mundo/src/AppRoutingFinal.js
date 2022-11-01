@@ -3,11 +3,13 @@ import NotFoundPage from './pages/404/NotFoundPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashBoardPage from './pages/dashboard/DashBoard';
+import ProfilePage from './pages/profile/ProfilePage';
+import TaskPage from './pages/tasks/TaskPage';
 
 function AppRoutingOne() {
 
   //TODO: Change to value from sessionStorage (or something dinamic)
-  let loggedIn = false;
+  let loggedIn = true;
 
   return (
     <Router>
@@ -26,13 +28,31 @@ function AppRoutingOne() {
         <Route exact path='/login' component={LoginPage} />
         {/* Register Route */}
         <Route exact path='/register' component={RegisterPage} />
+        {/* Profile Route */}
+        <Route exact path='/profile'>
+          {
+            loggedIn?
+            (<ProfilePage />)
+            :
+            <Redirect from='/' to='/login' />
+          }
+        </Route>
+        {/* Tasks Route */}
+        <Route path='/profile/tasks'>
+          {
+            loggedIn?
+            (<TaskPage />)
+            :
+            <Redirect from='/' to='/login' />
+          }
+        </Route>
         {/* Dashboard Route */}
         <Route exact path='/dashboard'>
           {
             loggedIn?
             (<DashBoardPage />)
             :
-            (<Redirect from='/' to='/login' />)
+            <Redirect from='/' to='/login' />
           }
         </Route>
         <Route component={NotFoundPage} />
