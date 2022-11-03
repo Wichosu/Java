@@ -9,7 +9,7 @@ import TaskPage from './pages/tasks/TaskPage';
 function AppRoutingOne() {
 
   //TODO: Change to value from sessionStorage (or something dinamic)
-  let loggedIn = true;
+  let loggedIn = false;
 
   return (
     <Router>

@@ -12,6 +12,10 @@ import Father from './components/containers/father.jsx';
 import OptionalRender from './components/pure/optionalRender';
 import LoginFormik from './components/pure/forms/loginFormik';
 import RegisterFormik from './components/pure/forms/registerFormik';
+import AsyncExample from './components/pure/AsyncExample';
+import ObservableExample from './components/pure/ObservableExample';
+import FetchExample from './components/pure/FetchExample';
+import AxiosExample from './components/pure/AxiosExample';
 
 function App() {
   return (
@@ -37,8 +41,16 @@ function App() {
         {/* Ejemplo de Formik y Yup */}
         {/* <LoginFormik /> */}
         {/* <RegisterFormik /> */}
+        {/* Ejemplo de procesos asíncronos */}
+        {/* <AsyncExample /> */}
+        {/* Ejemplo de fetch */}
+        {/* <FetchExample /> */}
+        {/* Ejemplo de axios */}
+        <AxiosExample />
+        {/* Ejemplo de observable */}
+        {/* <ObservableExample /> */}
         {/* PROYECTO FINAL: */}
-        <TaskListComponent />
+        {/* <TaskListComponent /> */}
       </header>
     </div>
   );
