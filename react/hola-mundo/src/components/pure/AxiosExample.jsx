@@ -10,7 +10,7 @@ const AxiosExample = () => {
   // }, []);
 
   const obtainUser = () => {
-    getRandomUser
+    getRandomUser()
       .then((response) => {
         if(response.status === 200) {
           setUser(response.data.results);
