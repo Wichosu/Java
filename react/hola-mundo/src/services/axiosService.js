@@ -1,5 +1,6 @@
 import APIRequest from '../utils/config/axios.config';
-import axios from 'axios';
+
+
 
 export function getRandomUser() {
   return APIRequest.get('/', {
