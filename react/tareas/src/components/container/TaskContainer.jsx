@@ -1,23 +1,73 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import TaskComponent from '../pure/Task';
 import { Task } from '../../models/task.class';
 import TaskForm from '../form/TaskForm';
 
 const TaskContainer = () => {
-
-  const [id, setId] = useState(0);
-
-  const [tasks, setTasks] = useState([]);
-
-  const addTask = (task) => {
-    setTasks([...tasks, task]);
-    setId(id + 1);
+  
+  const ADD_TASK = 'ADD_TASK';
+  const DELETE_TASK = 'DELETE_TASK';
+  const SHOW_ALL = 'SHOW_ALL';
+  const SHOW_PENDING = 'SHOW_PENDING';
+  const SHOW_COMPLETED = 'SHOW_COMPLETED';
+  const COMPLETE_TASK = 'COMPLETE_TASK';
+  
+  function reducer(tasks, action) {
+    switch (action.type) {
+      case ADD_TASK: {
+        return [...tasks, new Task(action.id, action.description, false)];
+      }
+      case DELETE_TASK: {
+        return tasks.filter(task => task.id !== action.id);
+      }
+      case COMPLETE_TASK: {
+        return tasks.map((task) => {
+          if (task.id === action.task.id) {
+            return action.task
+          } else {
+            return task
+          }
+        })
+      }
+      case SHOW_ALL: {
+        return [...tasks]
+      }
+      case SHOW_COMPLETED: {
+        return tasks.filter((task) => !task.completed)
+      }
+      case SHOW_PENDING: {
+        return tasks.filter((task) => task.completed)
+      }
+      default: {
+        throw new Error('Something went wrong on reducer')
+      }
+    }
   }
 
-  const deleteTask = (task) => {
-    const index = tasks.indexOf(task);
-    tasks.splice(index, 1);
-    setTasks([...tasks]);
+  const initialTask = [new Task(id, 'Initial Task', false)]
+
+  const [tasks, dispatch] = useReducer(reducer, initialTask)
+
+  const addTask = (description) => {
+    dispatch({
+      type: ADD_TASK,
+      id: ++id,
+      description: description
+    })
+  }
+  
+  const deleteTask = (taskId) => {
+    dispatch({
+      type: DELETE_TASK,
+      id: taskId
+    })
+  }
+
+  const completeTask = (task) => {
+    dispatch({
+      type: COMPLETE_TASK,
+      task: task
+    })
   }
 
   return (
@@ -30,6 +80,7 @@ const TaskContainer = () => {
               key={index}
               task={task}
               deleteTask={deleteTask}
+              completeTask={completeTask}
             />
           )
         })
@@ -38,5 +89,7 @@ const TaskContainer = () => {
     </div>
   );
 }
+
+let id = 1;
 
 export default TaskContainer;
