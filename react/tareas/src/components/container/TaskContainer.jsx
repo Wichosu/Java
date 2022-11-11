@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import TaskComponent from '../pure/Task';
 import { Task } from '../../models/task.class';
 import TaskForm from '../form/TaskForm';
+import TaskFilter from '../pure/TaskFilter';
 
 const TaskContainer = () => {
   
@@ -33,10 +34,10 @@ const TaskContainer = () => {
         return [...tasks]
       }
       case SHOW_COMPLETED: {
-        return tasks.filter((task) => !task.completed)
+        return tasks.filter((task) => task.completed)
       }
       case SHOW_PENDING: {
-        return tasks.filter((task) => task.completed)
+        return tasks.filter((task) => !task.completed)
       }
       default: {
         throw new Error('Something went wrong on reducer')
@@ -70,9 +71,31 @@ const TaskContainer = () => {
     })
   }
 
+  const showAll = () => {
+    dispatch({
+      type:SHOW_ALL
+    })
+  }
+
+  const showPending = () => {
+    dispatch({
+      type:SHOW_PENDING
+    })
+  }
+
+  const showCompleted = () => {
+    dispatch({
+      type:SHOW_COMPLETED
+    })
+  }
   return (
     <div>
       <h3>List of tasks</h3>
+      <TaskFilter
+        showAll={showAll}
+        showPending={showPending}
+        showCompleted={showCompleted}
+      />
       {
         tasks.map((task, index) => {
           return (
