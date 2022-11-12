@@ -1,8 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, createContext, useContext, useRef } from 'react';
 import TaskComponent from '../pure/Task';
 import { Task } from '../../models/task.class';
 import TaskForm from '../form/TaskForm';
 import TaskFilter from '../pure/TaskFilter';
+
+const containerContext = createContext(null);
 
 const TaskContainer = () => {
   
@@ -31,7 +33,7 @@ const TaskContainer = () => {
         })
       }
       case SHOW_ALL: {
-        return [...tasks]
+        return tasks
       }
       case SHOW_COMPLETED: {
         return tasks.filter((task) => task.completed)
@@ -88,29 +90,79 @@ const TaskContainer = () => {
       type:SHOW_COMPLETED
     })
   }
+
+  return (
+    <containerContext.Provider 
+      value={
+        {
+          tasks,
+          completeTask,
+          deleteTask, 
+          addTask,
+          showAll,
+          showPending,
+          showCompleted
+        }
+      }>
+      <h3>List of tasks</h3>
+      <Filter />
+      <List />
+      <Form />
+    </containerContext.Provider>
+  );
+}
+
+function List() {
+  const {
+    tasks,
+    completeTask,
+    deleteTask
+  } = useContext(containerContext);
+  
+  return (
+    tasks.map((task, index) => {
+      return (
+        <TaskComponent 
+          key={index}
+          task={task}
+          deleteTask={deleteTask}
+          completeTask={completeTask}
+        />
+      )
+    })
+  )
+}
+
+function Form() {
+  const { addTask } = useContext(containerContext);
+  const description = useRef();
+
+  return (
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      addTask(description.current.value);
+      description.current.value = '';
+    }}>
+        <input ref={description} placeholder='Description' required />
+        <button type='submit'>Add Task</button>
+    </form>
+  )
+}
+
+function Filter() {
+  const {
+    showAll,
+    showPending,
+    showCompleted
+  } = useContext(containerContext);
+
   return (
     <div>
-      <h3>List of tasks</h3>
-      <TaskFilter
-        showAll={showAll}
-        showPending={showPending}
-        showCompleted={showCompleted}
-      />
-      {
-        tasks.map((task, index) => {
-          return (
-            <TaskComponent 
-              key={index}
-              task={task}
-              deleteTask={deleteTask}
-              completeTask={completeTask}
-            />
-          )
-        })
-      }
-      <TaskForm addTask={addTask} id={id}/>
+      <button onClick={showAll}>Show All</button>
+      <button onClick={showPending}>Show Pending</button>
+      <button onClick={showCompleted}>Show Completed</button>
     </div>
-  );
+  )
 }
 
 let id = 1;
