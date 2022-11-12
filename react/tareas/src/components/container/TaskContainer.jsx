@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext, useRef } from 'react';
+import React, { useReducer, createContext, useContext, useRef, useState } from 'react';
 import TaskComponent from '../pure/Task';
 import { Task } from '../../models/task.class';
 import TaskForm from '../form/TaskForm';
@@ -7,6 +7,11 @@ import TaskFilter from '../pure/TaskFilter';
 const containerContext = createContext(null);
 
 const TaskContainer = () => {
+
+  const initialTask = [new Task(id, 'Initial Task', false)]
+  const [allTasks, setAllTasks] = useState(initialTask);
+  const [pendingTasks, setPendingTasks] = useState(initialTask);
+  const [completedTasks, setCompletedTasks] = useState([]);
   
   const ADD_TASK = 'ADD_TASK';
   const DELETE_TASK = 'DELETE_TASK';
@@ -18,12 +23,21 @@ const TaskContainer = () => {
   function reducer(tasks, action) {
     switch (action.type) {
       case ADD_TASK: {
+        setAllTasks([...tasks, new Task(action.id, action.description, false)])
         return [...tasks, new Task(action.id, action.description, false)];
       }
       case DELETE_TASK: {
         return tasks.filter(task => task.id !== action.id);
       }
       case COMPLETE_TASK: {
+        allTasks.map((task) => {
+          if (task.id === action.task.id) {
+            return action.task
+          } else {
+            return task
+          }
+        })
+
         return tasks.map((task) => {
           if (task.id === action.task.id) {
             return action.task
@@ -33,21 +47,21 @@ const TaskContainer = () => {
         })
       }
       case SHOW_ALL: {
-        return tasks
+        return allTasks 
       }
       case SHOW_COMPLETED: {
-        return tasks.filter((task) => task.completed)
+        setCompletedTasks(allTasks.filter((task) => task.completed));
+        return completedTasks
       }
       case SHOW_PENDING: {
-        return tasks.filter((task) => !task.completed)
+        setPendingTasks(allTasks.filter((task) => !task.completed));
+        return pendingTasks
       }
       default: {
         throw new Error('Something went wrong on reducer')
       }
     }
   }
-
-  const initialTask = [new Task(id, 'Initial Task', false)]
 
   const [tasks, dispatch] = useReducer(reducer, initialTask)
 
@@ -75,19 +89,19 @@ const TaskContainer = () => {
 
   const showAll = () => {
     dispatch({
-      type:SHOW_ALL
+      type:SHOW_ALL,
     })
   }
 
   const showPending = () => {
     dispatch({
-      type:SHOW_PENDING
+      type:SHOW_PENDING,
     })
   }
 
   const showCompleted = () => {
     dispatch({
-      type:SHOW_COMPLETED
+      type:SHOW_COMPLETED,
     })
   }
 

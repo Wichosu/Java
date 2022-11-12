@@ -7,7 +7,12 @@ import FilterOptions from './components/pure/FilterOptions';
 const AppReduxSaga = () => {
   return (
     <div className='App'>
-      <LoginFormContainer />
+      <header className='App-header'>
+        <FilterOptions />
+        <TodosContainer />
+        <TodoFormContainer />
+      </header>
+      {/* <LoginFormContainer /> */}
     </div>
   );
 }
