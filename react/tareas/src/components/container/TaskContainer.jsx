@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext, useRef, useState } from 'react';
+import React, { useReducer, createContext, useContext, useRef, useState, useEffect } from 'react';
 import TaskComponent from '../pure/Task';
 import { Task } from '../../models/task.class';
 import TaskForm from '../form/TaskForm';
@@ -8,10 +8,8 @@ const containerContext = createContext(null);
 
 const TaskContainer = () => {
 
-  const initialTask = [new Task(id, 'Initial Task', false)]
-  const [allTasks, setAllTasks] = useState(initialTask);
-  const [pendingTasks, setPendingTasks] = useState(initialTask);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const initialTask = [new Task(id, 'Initial Task', false)];
+
   
   const ADD_TASK = 'ADD_TASK';
   const DELETE_TASK = 'DELETE_TASK';
@@ -19,25 +17,18 @@ const TaskContainer = () => {
   const SHOW_PENDING = 'SHOW_PENDING';
   const SHOW_COMPLETED = 'SHOW_COMPLETED';
   const COMPLETE_TASK = 'COMPLETE_TASK';
-  
+
+  const [prevFilter, setPrevFilter] = useState(SHOW_ALL);
+
   function reducer(tasks, action) {
     switch (action.type) {
       case ADD_TASK: {
-        setAllTasks([...tasks, new Task(action.id, action.description, false)])
         return [...tasks, new Task(action.id, action.description, false)];
       }
       case DELETE_TASK: {
         return tasks.filter(task => task.id !== action.id);
       }
       case COMPLETE_TASK: {
-        allTasks.map((task) => {
-          if (task.id === action.task.id) {
-            return action.task
-          } else {
-            return task
-          }
-        })
-
         return tasks.map((task) => {
           if (task.id === action.task.id) {
             return action.task
@@ -46,24 +37,30 @@ const TaskContainer = () => {
           }
         })
       }
-      case SHOW_ALL: {
-        return allTasks 
-      }
-      case SHOW_COMPLETED: {
-        setCompletedTasks(allTasks.filter((task) => task.completed));
-        return completedTasks
-      }
-      case SHOW_PENDING: {
-        setPendingTasks(allTasks.filter((task) => !task.completed));
-        return pendingTasks
-      }
       default: {
         throw new Error('Something went wrong on reducer')
       }
     }
   }
 
-  const [tasks, dispatch] = useReducer(reducer, initialTask)
+  const [tasks, dispatch] = useReducer(reducer, initialTask);
+
+  const [filter, dispatchFilter] = useReducer((filter, action) => {
+    switch (action.type) {
+      case SHOW_ALL: {
+        return action.tasks
+      }
+      case SHOW_COMPLETED: {
+        return action.tasks.filter((task) => task.completed)
+      }
+      case SHOW_PENDING: {
+        return action.tasks.filter((task) => !task.completed)
+      }
+      default: {
+        throw new Error('Something wrong on filter reducer')
+      }
+    }
+  }, tasks);
 
   const addTask = (description) => {
     dispatch({
@@ -72,7 +69,7 @@ const TaskContainer = () => {
       description: description
     })
   }
-  
+
   const deleteTask = (taskId) => {
     dispatch({
       type: DELETE_TASK,
@@ -87,35 +84,49 @@ const TaskContainer = () => {
     })
   }
 
-  const showAll = () => {
-    dispatch({
+  const showAll = (tasks) => {
+    setPrevFilter(SHOW_ALL);
+    dispatchFilter({
       type:SHOW_ALL,
+      tasks: tasks
     })
   }
 
-  const showPending = () => {
-    dispatch({
+  const showPending = (tasks) => {
+    setPrevFilter(SHOW_PENDING);
+    dispatchFilter({
       type:SHOW_PENDING,
+      tasks: tasks
     })
   }
 
-  const showCompleted = () => {
-    dispatch({
+  const showCompleted = (tasks) => {
+    setPrevFilter(SHOW_COMPLETED);
+    dispatchFilter({
       type:SHOW_COMPLETED,
+      tasks: tasks
     })
   }
+
+  useEffect(() => {
+    dispatchFilter({
+      type: prevFilter,
+      tasks: tasks
+    })
+  }, [tasks]);
 
   return (
     <containerContext.Provider 
       value={
         {
           tasks,
+          filter,
           completeTask,
           deleteTask, 
           addTask,
           showAll,
           showPending,
-          showCompleted
+          showCompleted,
         }
       }>
       <h3>List of tasks</h3>
@@ -128,13 +139,13 @@ const TaskContainer = () => {
 
 function List() {
   const {
-    tasks,
+    filter,
     completeTask,
     deleteTask
   } = useContext(containerContext);
   
   return (
-    tasks.map((task, index) => {
+    filter.map((task, index) => {
       return (
         <TaskComponent 
           key={index}
@@ -165,6 +176,7 @@ function Form() {
 
 function Filter() {
   const {
+    tasks,
     showAll,
     showPending,
     showCompleted
@@ -172,9 +184,9 @@ function Filter() {
 
   return (
     <div>
-      <button onClick={showAll}>Show All</button>
-      <button onClick={showPending}>Show Pending</button>
-      <button onClick={showCompleted}>Show Completed</button>
+      <button onClick={() => showAll(tasks)}>Show All</button>
+      <button onClick={() => showPending(tasks)}>Show Pending</button>
+      <button onClick={() => showCompleted(tasks)}>Show Completed</button>
     </div>
   )
 }
